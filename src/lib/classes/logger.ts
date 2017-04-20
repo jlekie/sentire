@@ -17,7 +17,7 @@ export class Logger implements ILogger {
         return this;
     }
     public async log(level: LoggerLevels, message: string, metadata?: ILoggerMetadata) {
-        const matchTransports = this.transports.filter(t => t.level <= level);
+        const matchTransports = this.transports.filter(t => t.level >= level);
 
         await Promise.all(matchTransports.map(l => l.log(message, {
             ...this.metadata,
